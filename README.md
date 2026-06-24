@@ -148,6 +148,12 @@ I have also written a few small Python programs to experiment with some of these
 
 # Future Work
 
-In the coming weeks, I plan to study the remaining components required for building a complete ChatGPT-like model. This includes implementing different parts of the transformer architecture, understanding the training loop in more detail, and eventually generating text using the model.
+The next phase of the SOC project shifts from understanding concepts to implementing them.
 
-At this stage, my primary goal is to understand why each component exists before trying to optimize or improve the implementation.
+In Week 5, I will start learning PyTorch, which is one of the most commonly used deep learning frameworks. Until now, most of the concepts I studied were theoretical or explained using simple examples. Learning PyTorch will help me implement neural networks more efficiently and understand how automatic differentiation and model training work in practice.
+
+After that, the main focus will be the final project. The goal is to build a small ChatGPT-like language model by combining the concepts covered in the previous weeks. This will include implementing the different components involved in the model, preparing a dataset, training the model, and generating text from it. I expect this part to be more challenging because it combines everything learned so far.
+
+If time permits, I also plan to explore the optional topics mentioned in the roadmap. These include understanding pretrained language models, learning the basics of instruction fine-tuning, and seeing how pretrained models can be adapted for different tasks. I am also interested in trying to build a simple web interface so that the model can be interacted with more easily.
+
+At this stage, my focus is on understanding each concept properly while gradually moving towards implementing a complete language model by the end of the project.
