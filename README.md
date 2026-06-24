@@ -1,159 +1,179 @@
 # Building a ChatGPT-like Bot
 
-## Overview
+## About this Repository
 
-This repository contains my work and learning notes for the Summer of Code (SOC) project **Building a ChatGPT-like Bot**. The goal of this project is to understand how modern Large Language Models (LLMs) work and gradually build the different components involved in such systems instead of directly using existing libraries.
+This repository contains my work and notes for the Summer of Code (SOC) project **Building a ChatGPT-like Bot**.
 
-The project is divided into weekly milestones. During the first four weeks, I mainly focused on understanding the basic concepts that are required before actually building a language model. Rather than jumping directly into transformer architectures, I first revised Python, learned some useful data science libraries, studied neural networks, and then moved towards tokenization, embeddings, attention, and transformers.
+Before joining this project I had used ChatGPT many times but I never really knew what was happening inside it. I knew it was based on machine learning but I had no idea how text is processed or how a model is able to generate meaningful responses.
 
-The repository mainly contains notes that I wrote while studying the resources provided during the SOC. Some topics are still new to me, so these notes reflect my current understanding rather than complete documentation.
+The goal of this SOC is not to directly use existing language models. Instead, the idea is to understand every important concept step by step and then use that knowledge to build a simple ChatGPT-like model by the end of the project.
+
+Till now I have completed the first four weeks of the roadmap. These weeks mainly focused on building the required foundation before starting the actual implementation.
+
+This repository contains my notes and a few small code examples that I wrote while learning.
 
 ---
 
 # Week 1
 
-The first week was mostly a revision of Python along with learning a few important libraries that are commonly used while working with machine learning projects.
+The first week was mostly a revision of Python and some important libraries that are commonly used in machine learning.
 
-The libraries that I explored were:
+I studied NumPy, Pandas and Matplotlib.
 
-- NumPy
-- Pandas
-- Matplotlib
+Although I already knew Python, I had not used these libraries properly before. NumPy helped me understand how arrays work and why they are much faster than normal Python lists for numerical computations.
 
-Although I had used Python before, I had very little experience with these libraries. NumPy helped me understand how numerical computations are performed efficiently using arrays instead of Python lists. Pandas introduced me to handling tabular datasets, filtering rows, selecting columns, and reading CSV files. Matplotlib was useful for plotting simple graphs and visualizing data.
+Pandas introduced me to working with datasets. I learned how to read CSV files, access rows and columns and perform some basic operations on data.
 
-Apart from these libraries, I also started reading about Large Language Models.
+Matplotlib was useful for plotting graphs. I practiced creating simple plots to understand how data can be visualized.
 
-One thing that surprised me was that language models do not actually understand language in the way humans do. Instead, they learn statistical patterns from huge amounts of text and use those patterns to predict what token should come next.
+Apart from these libraries I also started reading about Large Language Models.
 
-This idea looked very simple at first, but I later realized that almost every part of an LLM is built around improving this next-token prediction process.
+One thing that surprised me was that language models do not actually understand language like humans do. They simply learn patterns from a very large amount of text and predict what token should come next.
+
+This idea looked simple in the beginning but later I realized that almost everything inside an LLM is connected to this next token prediction process.
 
 ---
 
 # Week 2
 
-The second week introduced the basics of neural networks.
+This week was about understanding neural networks.
 
-Before this week, I only had a rough idea that neural networks are inspired by the human brain. After studying the resources, I understood that a neural network is actually a mathematical model made up of layers of neurons connected through weights.
+I had heard terms like neurons and deep learning before but I never knew what they actually meant.
 
-Some of the concepts I studied include:
+I started with the basic perceptron model and then learned how multiple layers are connected together to form a neural network.
 
-- Perceptron
-- Weights and Biases
+Some of the concepts I studied were:
+
+- Weights
+- Bias
 - Activation Functions
 - Forward Propagation
-- Loss Functions
+- Loss Function
 - Gradient Descent
 - Backpropagation
 
-Initially, I found it difficult to understand why activation functions are needed. Later I learned that without them, stacking multiple linear layers would still behave like a single linear transformation. Activation functions introduce non-linearity, allowing the network to learn much more complicated relationships.
+At first backpropagation looked difficult because there were many mathematical equations. After watching the videos again I understood the main idea. The model makes a prediction, compares it with the correct answer and then updates its weights to reduce the error.
 
-Gradient descent was another important concept. Instead of manually changing parameters, the model computes gradients and updates its weights in a direction that reduces the loss. Although I understand the intuition, I still need more practice with the mathematical derivation.
+I still need to practice the mathematics behind it but the overall idea is much clearer now.
 
 ---
 
 # Week 3
 
-After understanding neural networks, I started learning about how text is represented inside language models.
+This week introduced concepts that are directly related to language models.
 
-The first concept was tokenization.
+The first topic was tokenization.
 
-Computers cannot directly process text. Every sentence first has to be divided into smaller units called tokens.
+Computers cannot understand text directly. Every sentence first needs to be divided into smaller pieces called tokens.
 
 For example,
 
 ```
-I love machine learning.
+I like playing chess.
 ```
 
 can become
 
 ```
-["I", "love", "machine", "learning", "."]
+["I", "like", "playing", "chess", "."]
 ```
 
-Depending on the tokenizer, a single word may also be divided into multiple subwords.
+Different tokenizers can split text differently. Sometimes even a single word is divided into smaller parts.
 
-After tokenization, each token is converted into an integer ID.
+After tokenization every token is assigned an integer ID.
 
-However, integer IDs alone do not contain any semantic meaning.
+I first thought that these IDs were enough for the model but later I learned about embeddings.
 
-This is where embeddings become important.
+Embeddings convert every token into a vector.
 
-Embeddings represent every token as a vector containing multiple numerical values. During training, these vectors are adjusted so that tokens appearing in similar contexts become closer in the embedding space.
+These vectors help the model learn relationships between words. For example, words that appear in similar contexts usually end up having similar vector representations.
 
-Although I understood why embeddings are required, I am still curious about how these vectors gradually learn meaningful relationships during training.
+I understood why embeddings are needed but I still want to learn more about how these vectors are updated during training.
 
 ---
 
 # Week 4
 
-This week introduced transformers and the attention mechanism.
+This week I started learning about transformers and attention.
 
-Earlier sequence models processed words one after another. This made training slower and also caused difficulty when sentences became very long.
+Before this I only knew that ChatGPT is based on transformers. I never knew why transformers became so popular.
 
-Transformers solve this problem differently.
+The attention mechanism allows every word in a sentence to look at other words while making a prediction.
 
-Every token is allowed to interact with every other token using a mechanism called self-attention.
+For example, consider the sentence
 
-Instead of remembering information sequentially, the model calculates which words are more important for predicting the next token.
+```
+The boy picked up the ball because it was on the ground.
+```
 
-The transformer architecture also contains several additional components such as positional encoding, feed-forward layers, residual connections, and layer normalization.
+Here the word "it" refers to the ball.
 
-I now have a general understanding of how these components are arranged, although the mathematical details behind Query, Key, and Value vectors are still slightly confusing.
+The attention mechanism helps the model understand these kinds of relationships.
 
-Another concept introduced during this week was the overall training pipeline of an LLM.
+I also learned that transformer models process many tokens at the same time instead of reading them one after another. This makes training much faster than older sequence models.
 
-The complete flow can be summarized as:
+Towards the end of the week I looked at the complete pipeline of a language model.
 
 ```
 Input Text
-      ↓
+
+↓
+
 Tokenizer
-      ↓
+
+↓
+
 Token IDs
-      ↓
+
+↓
+
 Embeddings
-      ↓
-Positional Encoding
-      ↓
+
+↓
+
 Transformer Layers
-      ↓
-Linear Layer
-      ↓
-Softmax
-      ↓
-Next Token Prediction
-      ↓
+
+↓
+
+Prediction
+
+↓
+
 Loss Calculation
-      ↓
+
+↓
+
 Backpropagation
-      ↓
-Parameter Update
+
+↓
+
+Updated Parameters
 ```
 
-Studying this pipeline helped me connect the topics from previous weeks together. Earlier I learned each component separately, but this week I understood where each component fits inside the complete model.
+This was probably the most useful part because it connected many of the topics that I had studied over the previous weeks.
+
+There are still a few things that I find confusing. The Query, Key and Value matrices used in self attention are one example. I understand their purpose but I still need to spend more time understanding the calculations.
 
 ---
 
-# Current Progress
+# Current Understanding
 
-After completing the first four weeks, I have developed a basic understanding of how language models process text before generating responses.
+After four weeks I feel that I now understand the basic flow of a language model much better than before.
 
-I understand the motivation behind tokenization, embeddings, neural networks, attention, and transformers at a conceptual level. There are still several mathematical details that I need to study more carefully, especially attention score computation and the training process.
+I know why tokenization is needed, what embeddings do, how neural networks learn and why transformers are used for language models.
 
-I have also written a few small Python programs to experiment with some of these concepts. These programs are not intended to be complete implementations but rather small exercises to reinforce my understanding.
+I have not built a complete model yet because the implementation part comes later in the roadmap. Right now my focus is on understanding the concepts properly before writing larger programs.
 
 ---
 
 # Future Work
 
-The next phase of the SOC project shifts from understanding concepts to implementing them.
+The next part of the SOC focuses more on implementation.
 
-In Week 5, I will start learning PyTorch, which is one of the most commonly used deep learning frameworks. Until now, most of the concepts I studied were theoretical or explained using simple examples. Learning PyTorch will help me implement neural networks more efficiently and understand how automatic differentiation and model training work in practice.
+In Week 5 I will start learning PyTorch. Till now most of the things I studied were concepts. PyTorch will help me implement these ideas in code and understand how models are trained in practice.
 
-After that, the main focus will be the final project. The goal is to build a small ChatGPT-like language model by combining the concepts covered in the previous weeks. This will include implementing the different components involved in the model, preparing a dataset, training the model, and generating text from it. I expect this part to be more challenging because it combines everything learned so far.
+Week 6 is the final project where the goal is to build a simple ChatGPT-like model. This will combine the topics covered in the previous weeks into one project.
 
-If time permits, I also plan to explore the optional topics mentioned in the roadmap. These include understanding pretrained language models, learning the basics of instruction fine-tuning, and seeing how pretrained models can be adapted for different tasks. I am also interested in trying to build a simple web interface so that the model can be interacted with more easily.
+The roadmap also includes some optional topics such as exploring pretrained models, instruction fine tuning and building a small web application if time permits.
 
-At this stage, my focus is on understanding each concept properly while gradually moving towards implementing a complete language model by the end of the project.
+I am looking forward to implementing these ideas because I think writing the code will help me understand the concepts much better than only reading about them.
